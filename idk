@@ -1,0 +1,33 @@
+# telegram-bot
+#!/usr/bin/python
+
+# This is a simple echo bot using the decorator mechanism.
+# It echoes any incoming text messages.
+
+import telebot
+
+API_TOKEN = '<5528691500:AAG4RSVOy-ABqA8OAQ7VGsCeTl9dfA13T6k>'
+
+bot = telebot.TeleBot(API_TOKEN)
+
+# Handle '/start' and '/help'
+@bot.message_handler(commands=['help', 'start'])
+def send_welcome(message):
+    bot.reply_to(message, """\
+    ciao, io sono un bot fatto a cazzo di cane programmato da un testa di cazzo, non so che dire, aiutatemi, vi voglio bene "faccina"
+I am here to echo your kind words back to you. Just say anything nice and I'll say the exact same thing to you!\
+""")
+
+
+# Handle all other messages with content_type 'text' (content_types defaults to ['text'])
+@bot.message_handler(func=lambda message: True)
+def echo_message(message):
+if message.text=='Ciao':
+ bot.reply_to(message, 'Ciao evocatore')
+ elif message.text=='Bene':
+ bot.reply_to(message, 'ho killato mio fratello, come potrei mai stare xd')
+ else:
+ bot.reply_to(message, 'non so che fare lmaof')
+
+
+bot.infinity_polling()
